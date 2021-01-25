@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import db from "../db.json";
 
-import QuizBackground from '../src/components/QuizBackground';
-import Widget from '../src/components/Widget';
-import Footer from '../src/components/Footer';
-import GitHubCorner from '../src/components/GitHubCorner';
+import QuizBackground from "../src/components/QuizBackground";
+import Widget from "../src/components/Widget";
+import Footer from "../src/components/Footer";
+import GitHubCorner from "../src/components/GitHubCorner";
 
 const QuizContainer = styled.div`
 	width: 100%;
@@ -36,9 +36,9 @@ export default function Home() {
 					</Widget.Content>
 				</Widget>
 
-        <Footer />
+				<Footer />
 			</QuizContainer>
-      <GitHubCorner projectUrl='https://github.com/pedrohb88' />
+			<GitHubCorner projectUrl="https://github.com/pedrohb88" />
 		</QuizBackground>
 	);
 }
