@@ -1,28 +1,126 @@
 {
-    "bg": "imgs/background-image.jpg",
+    "bg": "https://br.freepik.com/download-file/986619",
     "title": "Quiz CSS da Alura",
     "description": "Teste os seus conhecimentos sobre CSS e vamos ver quantos layouts você vai deixar de quebrar",
     "questions": [
       {
-        "image": "https://media.giphy.com/media/xUOxf3yDKCuwpOlT3i/giphy.gif",
-        "title": "Como fazer um seletor por id via CSS?",
-        "description": "Essa é pra aquecer",
+        "image": "https://media.giphy.com/media/HrII6OTm4ce7S/giphy.gif",
+        "title": "Como é chamado o tipo de corte em que a cebola é cortada em cubinhos?",
+        "description": "Afinal, cozinha sem cebola não é cozinha...",
         "answer": 2,
         "alternatives": [
-          ".elemento",
-          "*elemento",
-          "#elemento",
-          "%elemento"
+          "Julienne",
+          "Cuboian",
+          "Brunoise",
+          "Cubitos"
         ]
       },
       {
-        "image": "https://media.giphy.com/media/13FrpeVH09Zrb2/giphy.gif",
-        "title": "Como fazer um background gradiente com css?",
-        "description": "Faz tempo em haha",
+        "image": "https://media.giphy.com/media/Jot3a4wPBdyTIth3RF/giphy.gif",
+        "title": "Como é chamado o \"quinto sabor\"?",
+        "description": "Seu nome significa \"sabor delicioso\".",
+        "answer": 1,
+        "alternatives": [
+           "Estridente",
+           "Umami",
+           "Azedo",
+           "Doce"
+        ]
+      },
+      {
+        "image": "https://media.giphy.com/media/nZ178MJ3qSx6U/giphy.gif",
+        "title": "Quanto frango é consumido por ano mundialmente?",
+        "description": "Não é pouco não...",
+        "answer": 3,
+        "alternatives": [
+           "12,6 milhões de quilos",
+           "102 milhões de quilos",
+           "15,2 milhões de toneladas",
+           "98,5 milhões de toneadas"
+        ]
+      },
+      {
+        "image": "https://media.giphy.com/media/Q73Bb4tlFNtJlmagIk/giphy.gif",
+        "title": "Qual desses ingredientes NÃO vai na massa de uma tradicional pizza napoletana?",
+        "description": "Pizza <3",
+        "answer": 1,
+        "alternatives": [
+           "Farinha de trigo",
+           "Ovos",
+           "Fermento",
+           "Água"
+        ]
+      },
+      {
+        "image": "https://media.giphy.com/media/l3q2VzdRrQtwMZuKc/giphy.gif",
+        "title": "Qual desses NÃO é um doce francês?",
+        "description": "Como dizem na frança: bonapetí, parceiro.",
+        "answer": 3,
+        "alternatives": [
+           "Éclair",
+           "Crème Brûlée",
+           "Madeleine",
+           "Docién"
+        ]
+      },
+      {
+        "image": "https://media.giphy.com/media/GCpeJgCgS4i88/giphy.gif",
+        "title": "Qual dessas é uma técnica de cozinha?",
+        "description": "Fazer pipoca é a técnica mais avançada que existe.",
+        "answer": 1,
+        "alternatives": [
+           "Sacolejar",
+           "Reduzir",
+           "Esvoaçar",
+           "Amarelar"
+        ]
+      },
+      {
+        "image": "https://media.giphy.com/media/3oz8xOdN0wl67HjD4Q/giphy.gif",
+        "title": "Como é o nome da alga muito utilizada na cozinha japonesa?",
+        "description": "Ela é crocante...",
         "answer": 0,
         "alternatives": [
-           "background: linear-gradient(#e66465, #9198e5);",
-           "background: gradient(#e66465, #9198e5);"
+           "Nori",
+           "Sushi",
+           "Temaki",
+           "Tori"
+        ]
+      },
+      {
+        "image": "https://media.giphy.com/media/3osxYjyp2lGOHPCaYM/giphy.gif",
+        "title": "Qual desses é um prato da culinária árabe?",
+        "description": "Ô culinária pra ter comida boa...",
+        "answer": 1,
+        "alternatives": [
+           "Salada de amêndoas",
+           "Fatuche",
+           "Pretzel",
+           "Frikadeller"
+        ]
+      },
+      {
+        "image": "https://media.giphy.com/media/xT9IgyFOAUJNcOjnsk/giphy.gif",
+        "title": "Quanto tempo leva em média para cozinhar um ovo?",
+        "description": "O que dizer de um alimento que tem até um rap?",
+        "answer": 2,
+        "alternatives": [
+           "1 minuto",
+           "20 minutos",
+           "10 minutos",
+           "50 segundos"
+        ]
+      },
+      {
+        "image": "https://media.giphy.com/media/jKaFXbKyZFja0/giphy.gif",
+        "title": "Qual desses NÃO é um prato típico brasileiro?",
+        "description": "Por fim, Brasil!",
+        "answer": 0,
+        "alternatives": [
+            "Lasanha",
+            "Moqueca",
+            "Pão de queijo",
+            "Coxinha"
         ]
       }
     ],
