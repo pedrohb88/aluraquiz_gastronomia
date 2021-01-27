@@ -4,12 +4,14 @@ import db from '../db.json';
 import QuizBackground from '../src/components/QuizBackground';
 import QuizContainer from '../src/components/QuizContainer';
 import Widget from '../src/components/Widget';
+import QuizLogo from '../src/components/QuizLogo';
 
 function Quiz({ name }) {
   return (
     <QuizBackground backgroundImage={db.bg}>
       <h1>
         <QuizContainer>
+          <QuizLogo />
           <Widget>
             <Widget.Header>
               <h1>Bem vindo(a)!</h1>
