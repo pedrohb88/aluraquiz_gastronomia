@@ -1,11 +1,29 @@
-import styled from "styled-components";
-import db from "../db.json";
-import QuizBackground from "../src/components/QuizBackground";
+import React from 'react';
+import styled from 'styled-components';
+import db from '../db.json';
+import QuizBackground from '../src/components/QuizBackground';
+import QuizContainer from '../src/components/QuizContainer';
+import Widget from '../src/components/Widget';
 
-export default function Quiz() {
-    return (
-        <QuizBackground backgroundImage={db.bg}>
-            <h1>Quiz!</h1>
-        </QuizBackground>
-    );
+function Quiz({ name }) {
+  return (
+    <QuizBackground backgroundImage={db.bg}>
+      <h1>
+        <QuizContainer>
+          <Widget>
+            <Widget.Header>
+              <h1>Bem vindo(a)!</h1>
+            </Widget.Header>
+            <Widget.Content>
+              <p>Olá, {name}! Bora começar?</p>
+            </Widget.Content>
+          </Widget>
+        </QuizContainer>
+      </h1>
+    </QuizBackground>
+  );
 }
+
+Quiz.getInitialProps = ({ query }) => ({ name: query.name });
+
+export default Quiz;
