@@ -6,6 +6,7 @@ import QuizContainer from '../src/components/QuizContainer';
 import Widget from '../src/components/Widget';
 import QuizLogo from '../src/components/QuizLogo';
 import QuestionWidget from '../src/components/QuestionWidget';
+import ResultWidget from '../src/components/ResultWidget';
 
 function LoadingWidget() {
   return (
@@ -34,10 +35,7 @@ function Quiz({ name }) {
 
   const [screenState, setScreenState] = useState(screenStates.LOADING);
   
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [correctAnswers, setcorrectAnswers] = useState(0);
-
-  const [resultMessage, setResultMessage] = useState(null);
+  const [results, setResults] = useState([]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -45,42 +43,20 @@ function Quiz({ name }) {
     }, 1 * 1000);
   }, []);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const submitAnswer = async (selectedAnswer) => {
+    const isCorrect = parseInt(selectedAnswer, 10) === question.answer;
 
-    if (selectedAnswer === null) return alert('Selecione alguma alternativa!');
-
-    if (parseInt(selectedAnswer, 10) === question.answer) {
-      setcorrectAnswers(correctAnswers + 1);
-    }
-    setSelectedAnswer(null);
-
+    setResults([
+      ...results,
+      isCorrect,
+    ]);
+   
     const nextQuestionIndex = questionIndex + 1;
-
     if (nextQuestionIndex >= totalQuestions) {
-      const correctPercentage = (correctAnswers / totalQuestions) * 100;
-
-      let message = '';
-      if (correctPercentage < 20) {
-        message = `${name}, você ainda não conhece tanto de cozinha, mas nada que bons programas de culinária não resolvam.`;
-      } else if (correctPercentage < 50) {
-        message = `${name}, você tem certo domínio sobre a cozinha, e quando precisa sabe botar a mão na massa.`;
-      } else if (correctPercentage < 80) {
-        message = `${name}, você conhece quase tudo sobre culinária e manda ver na cozinha.`;
-      } else {
-        message = `Ora ora, parece que temos um(a) possível chefe aqui. ${name}, você conhece de tudo no mundo da culinária, e já está mais do que acostumado(a) a fazer maravilhas na cozinha.`;
-      }
-
-      setResultMessage(message);
-
       setScreenState(screenStates.RESULT);
     } else {
       setQuestionIndex(nextQuestionIndex);
     }
-  };
-
-  const onAnswerChange = (e) => {
-    setSelectedAnswer(e.target.value);
   };
 
   return (
@@ -90,26 +66,17 @@ function Quiz({ name }) {
         {screenState === screenStates.LOADING && <LoadingWidget />}
 
         {screenState === screenStates.QUIZ && (
-          <QuestionWidget 
-            question={question} 
-            questionIndex={questionIndex}
-            totalQuestions={totalQuestions}
-            onSubmit={onSubmit}
-            onAnswerChange={onAnswerChange}
-          />
+          <>
+            <QuestionWidget 
+              question={question} 
+              questionIndex={questionIndex}
+              totalQuestions={totalQuestions}
+              submitAnswer={submitAnswer}
+            />
+          </>
         )}
 
-        {screenState === screenStates.RESULT && (
-          <Widget>
-            <Widget.Header>
-              <h1>Resultado</h1>
-            </Widget.Header>
-            <Widget.Content>
-              <p>{`Você acertou ${correctAnswers} de ${totalQuestions} questões.`}</p>
-              <p>{resultMessage}</p>
-            </Widget.Content>
-          </Widget>
-        )}
+        {screenState === screenStates.RESULT && <ResultWidget results={results} name={name} />}
 
       </QuizContainer>
     </QuizBackground>

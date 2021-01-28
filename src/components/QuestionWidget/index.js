@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Widget from '../Widget';
 import Button from '../Button';
+import AlternativesForm from '../AlternativesForm';
 
 function QuestionWidget({
-  question, totalQuestions, questionIndex, onSubmit, onAnswerChange, 
+  question, totalQuestions, questionIndex, submitAnswer,
 }) {
+  const [selectedAnswer, setSelectedAnswer] = useState(undefined);
+  const [isQuestionSubmited, setIsQuestionSubmited] = useState(false);
+ 
+  const isAlternativeSelected = selectedAnswer !== undefined;
+  const shouldDisableButton = (!isQuestionSubmited && !isAlternativeSelected) || isQuestionSubmited;
+  const isCorrect = parseInt(selectedAnswer, 10) === question.answer;
+
   return (
     <Widget>
       <Widget.Header>
@@ -31,33 +39,53 @@ function QuestionWidget({
           {question.description}
         </p>
         
-        <form onSubmit={onSubmit}>
-          {question.alternatives.map((alternative, index) => {
-            const alternativeIndex = `question__${questionIndex}__alternative__${index}`;
+        <AlternativesForm onSubmit={(e) => {
+          e.preventDefault();
+          setIsQuestionSubmited(true);
 
-            return (
-              <Widget.Topic 
-                key={alternativeIndex}
-                as="label"
-                htmlFor={alternativeIndex}
-              >
-                <input 
-                  id={alternativeIndex} 
-                  type="radio"
-                  name={`question__${questionIndex}`}
-                  value={index}
-                  onChange={onAnswerChange}
-                />
-                {alternative}
-              </Widget.Topic>
-            
-            );
-          })}
+          setTimeout(() => {
+            submitAnswer(selectedAnswer);
+            setIsQuestionSubmited(false);
+            setSelectedAnswer(undefined);
+          }, 3 * 1000);
+        }}
+        >
+          <fieldset disabled={isQuestionSubmited ? 'disabled' : null} style={{ padding: 0, margin: 0, border: 'none' }}>
+            {question.alternatives.map((alternative, index) => {
+              const alternativeIndex = `question__${questionIndex}__alternative__${index}`;
 
-          <Button type="submit">
+              const alternativeStatus = isCorrect ? 'SUCCESS' : 'ERROR';
+              const isSelected = parseInt(selectedAnswer, 10) === index;
+
+              return (
+                <Widget.Topic 
+                  key={alternativeIndex}
+                  as="label"
+                  htmlFor={alternativeIndex}
+                  data-selected={isSelected}
+                  data-status={isQuestionSubmited && alternativeStatus}
+                >
+                  <input 
+                    style={{ display: 'none' }}
+                    id={alternativeIndex} 
+                    type="radio"
+                    name={`question__${questionIndex}`}
+                    value={index}
+                    onChange={() => {
+                      setSelectedAnswer(index);
+                    }}
+                  />
+                  {alternative}
+                </Widget.Topic>
+              
+              );
+            })}
+          </fieldset>
+
+          <Button disabled={shouldDisableButton} type="submit">
             Confirmar
           </Button>
-        </form>
+        </AlternativesForm>
       </Widget.Content>
     </Widget>
   ); 
@@ -68,8 +96,7 @@ QuestionWidget.propTypes = {
   question: PropTypes.object.isRequired,
   totalQuestions: PropTypes.number.isRequired,
   questionIndex: PropTypes.number.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  onAnswerChange: PropTypes.func.isRequired,
+  submitAnswer: PropTypes.func.isRequired,
 };
 
 export default QuestionWidget;
