@@ -125,13 +125,16 @@
       }
     ],
     "external": [
-      ""
+      "https://fakenewsquiz.dianasgs.vercel.app/",
+      "https://aluraquiz.edlanioj.vercel.app/",
+      "https://aluraquiz-css.omariosouto.vercel.app/"
     ],
     "theme": {
       "colors": {
         "primary": "#ffee58",
         "secondary": "#d50000",
         "mainBg": "#4b4b4b",
+        "contrastText": "#ffffff",
         "darkContrastText": "#ffffff",
         "lightContrastText": "#222222",
         "wrong": "#FF5722",

@@ -28,7 +28,7 @@ Widget.Header = styled.header`
 	align-items: center;
 	padding: 18px 32px;
 	background-color: ${({ theme }) => theme.colors.primary};
-	color: ${({ theme }) => theme.colors.lightContrastText};
+	color: ${({ theme }) => (theme.colors.lightContrastText ? theme.colors.lightContrastText : theme.colors.contrastText)};
 
 	* {
 		margin: 0;
@@ -37,7 +37,7 @@ Widget.Header = styled.header`
 
 Widget.Content = styled.div`
 	padding: 24px 32px 32px 32px;
-	color: ${({ theme }) => theme.colors.darkContrastText};
+	color: ${({ theme }) => theme.colors.contrastText};
 	& > *:first-child {
 		margin-top: 0;
 	}

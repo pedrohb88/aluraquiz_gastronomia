@@ -7,7 +7,7 @@ const Input = styled.input`
     border-radius: 4px;
     border: 0.1em solid ${({ theme }) => theme.colors.primary};
     background-color: rgba(0, 0, 0, 0.2);
-    color: ${({ theme }) => theme.colors.darkContrastText};
+    color: ${({ theme }) => theme.colors.contrastText};
 `;
 
 export default Input;

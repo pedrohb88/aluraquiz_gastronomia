@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import db from '../db.json';
-import QuizBackground from '../src/components/QuizBackground';
-import QuizContainer from '../src/components/QuizContainer';
-import Widget from '../src/components/Widget';
-import QuizLogo from '../src/components/QuizLogo';
-import QuestionWidget from '../src/components/QuestionWidget';
-import ResultWidget from '../src/components/ResultWidget';
+import QuizBackground from '../QuizBackground';
+import QuizContainer from '../QuizContainer';
+import Widget from '../Widget';
+import QuizLogo from '../QuizLogo';
+import QuestionWidget from '../QuestionWidget';
+import ResultWidget from '../ResultWidget';
 
 function LoadingWidget() {
   return (
@@ -27,7 +26,7 @@ const screenStates = {
   RESULT: 'RESULT',
 };
 
-function Quiz({ name }) {
+function QuizBase({ db, name }) {
   const totalQuestions = db.questions.length;
 
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -76,17 +75,23 @@ function Quiz({ name }) {
           </>
         )}
 
-        {screenState === screenStates.RESULT && <ResultWidget results={results} name={name} />}
+        {screenState === screenStates.RESULT && (
+          <ResultWidget 
+            results={results} 
+            name={name} 
+            totalQuestions={db.questions.length} 
+          />
+        )}
 
       </QuizContainer>
     </QuizBackground>
   );
 }
 
-export const getServerSideProps = ({ query }) => ({ props: { name: query.name } });
-
-Quiz.propTypes = {
+QuizBase.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  db: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
 };
 
-export default Quiz;
+export default QuizBase;
