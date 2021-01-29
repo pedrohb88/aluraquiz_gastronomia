@@ -2,23 +2,10 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import QuizBackground from '../QuizBackground';
 import QuizContainer from '../QuizContainer';
-import Widget from '../Widget';
 import QuizLogo from '../QuizLogo';
 import QuestionWidget from '../QuestionWidget';
 import ResultWidget from '../ResultWidget';
-
-function LoadingWidget() {
-  return (
-    <Widget>
-      <Widget.Header>
-        <h1>Carregando</h1>
-      </Widget.Header>
-      <Widget.Content>
-        <p>Loading Spinner</p>
-      </Widget.Content>
-    </Widget>
-  );
-}
+import Loader from '../Loader';
 
 const screenStates = {
   LOADING: 'LOADING',
@@ -32,15 +19,15 @@ function QuizBase({ db, name }) {
   const [questionIndex, setQuestionIndex] = useState(0);
   const question = db.questions[questionIndex];
 
-  const [screenState, setScreenState] = useState(screenStates.LOADING);
+  const [screenState, setScreenState] = useState(screenStates.QUIZ);
   
   const [results, setResults] = useState([]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     setTimeout(() => {
       setScreenState(screenStates.QUIZ);
     }, 1 * 1000);
-  }, []);
+  }, []); */
 
   const submitAnswer = async (selectedAnswer) => {
     const isCorrect = parseInt(selectedAnswer, 10) === question.answer;
@@ -59,32 +46,33 @@ function QuizBase({ db, name }) {
   };
 
   return (
-    <QuizBackground backgroundImage={db.bg}>
-      <QuizContainer>
-        <QuizLogo />
-        {screenState === screenStates.LOADING && <LoadingWidget />}
+    <>
+      {screenState === screenStates.LOADING && <Loader />}
+      <QuizBackground backgroundImage={db.bg}>
+        <QuizContainer>
+          <QuizLogo />
+          {screenState === screenStates.QUIZ && (
+            <>
+              <QuestionWidget 
+                question={question} 
+                questionIndex={questionIndex}
+                totalQuestions={totalQuestions}
+                submitAnswer={submitAnswer}
+              />
+            </>
+          )}
 
-        {screenState === screenStates.QUIZ && (
-          <>
-            <QuestionWidget 
-              question={question} 
-              questionIndex={questionIndex}
-              totalQuestions={totalQuestions}
-              submitAnswer={submitAnswer}
+          {screenState === screenStates.RESULT && (
+            <ResultWidget 
+              results={results} 
+              name={name} 
+              totalQuestions={db.questions.length} 
             />
-          </>
-        )}
+          )}
 
-        {screenState === screenStates.RESULT && (
-          <ResultWidget 
-            results={results} 
-            name={name} 
-            totalQuestions={db.questions.length} 
-          />
-        )}
-
-      </QuizContainer>
-    </QuizBackground>
+        </QuizContainer>
+      </QuizBackground>
+    </>
   );
 }
 
